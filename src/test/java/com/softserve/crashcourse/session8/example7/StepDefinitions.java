@@ -1,4 +1,4 @@
-package com.softserve.crashcourse.session8.example8;
+package com.softserve.crashcourse.session8.example7;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;

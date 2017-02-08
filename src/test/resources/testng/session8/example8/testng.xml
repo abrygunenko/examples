@@ -2,7 +2,7 @@
 <suite name="Test runner" parallel="classes" thread-count="2">
     <test name="Package with subpackages">
         <packages>
-            <package name="com.softserve.crashcourse.session8.example9.runners.*"/>
+            <package name="com.softserve.crashcourse.session8.example8.runners.*"/>
         </packages>
     </test>
 </suite>

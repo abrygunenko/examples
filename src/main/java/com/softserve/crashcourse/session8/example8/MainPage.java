@@ -1,4 +1,4 @@
-package com.softserve.crashcourse.session8.example9;
+package com.softserve.crashcourse.session8.example8;
 
 import org.openqa.selenium.WebDriver;
 

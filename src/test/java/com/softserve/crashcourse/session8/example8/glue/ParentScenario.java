@@ -1,7 +1,7 @@
-package com.softserve.crashcourse.session8.example9.glue;
+package com.softserve.crashcourse.session8.example8.glue;
 
-import com.softserve.crashcourse.session8.example9.DownloadPage;
-import com.softserve.crashcourse.session8.example9.MainPage;
+import com.softserve.crashcourse.session8.example8.DownloadPage;
+import com.softserve.crashcourse.session8.example8.MainPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
