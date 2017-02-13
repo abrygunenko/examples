@@ -10,7 +10,6 @@
 
     <properties>
         <org.seleniumhq.selenium-version>3.0.1</org.seleniumhq.selenium-version>
-        <!--<webdriver.gecko.driver>"D:\Tools\WebDrivers\geckodriver.exe"</webdriver.gecko.driver>-->
     </properties>
 
     <build>
@@ -32,7 +31,11 @@
                 <version>2.18.1</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testng/testng.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/com/softserve/crashcourse/session8/example2/testng/testng.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/com/softserve/crashcourse/session8/example3/testng/testng.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/com/softserve/crashcourse/session8/example8/testng/testng.xml</suiteXmlFile>
+                        <!--<suiteXmlFile>src/test/resources/com/softserve/crashcourse/session9/example2/testng/testng1.xml</suiteXmlFile>-->
+                        <!--<suiteXmlFile>src/test/resources/com/softserve/crashcourse/session9/example2/testng/testng2.xml</suiteXmlFile>-->
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

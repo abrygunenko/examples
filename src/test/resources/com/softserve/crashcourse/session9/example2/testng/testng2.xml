@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite2" parallel="false">
+    <test name="Test2">
+        <groups>
+            <run>
+                <include name="group2"/>
+                <include name="group3"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.softserve.crashcourse.session9.example2.HtmlTest"/>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
