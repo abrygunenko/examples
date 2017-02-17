@@ -14,15 +14,13 @@ import org.testng.annotations.Test;
 public class HtmlTest {
 //    private WebDriver driver = new FirefoxDriver();
     private WebDriver driver = new ChromeDriver();
-    private String pathToHtml =
-//            "file:\\\\\\testdata\\forTest.html";
+    private String pathToHtmlFile =
             "file:\\\\\\D:\\Repos\\new\\src\\test\\resources\\com\\softserve\\crashcourse\\session9\\example2\\testdata\\forTest.html";
-//            "file:///D:/Repos/new/src/test/resources/testdata/session9/example2/forTest.html";
 
     @BeforeClass
     public void oneTimeSetUp() {
         // one-time initialization code
-        driver.get(pathToHtml);
+        driver.get(pathToHtmlFile);
         System.out.println("@BeforeClass - oneTimeSetUp " + driver.getCurrentUrl());
         Reporter.log("@BeforeClass - oneTimeSetUp");
     }

@@ -5,6 +5,6 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(features = "src/test/resources/com/softserve/crashcourse/session8/example7/features/Example.feature",
         glue = "com.softserve.crashcourse.session8.example7",
-        format = {"pretty"})
+        format = {"pretty", "html:target/cucumber"})
 public class ExampleFeatureRunner extends AbstractTestNGCucumberTests {
 }
