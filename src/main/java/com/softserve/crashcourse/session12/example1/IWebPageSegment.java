@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public interface IWebPageSegment {
 
     WebDriver getWebDriver();
@@ -13,6 +15,8 @@ public interface IWebPageSegment {
     WebElement locateElement(By locator);
 
     WebElement locateElement(WebElement webElement, By locator);
+
+    List<WebElement> locateElements(By locator);
 
     void clickOnElement(By locator);
 
@@ -29,7 +33,7 @@ public interface IWebPageSegment {
     void selectOptionByText(By locator, String text);
 
     void selectOptionByText(WebElement webElement, By locator, String text);
-    
+
     void selectOptionByValue(By locator, String value);
 
     void selectOptionByValue(WebElement webElement, By locator, String value);
