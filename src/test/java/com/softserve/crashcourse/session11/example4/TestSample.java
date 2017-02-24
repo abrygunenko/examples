@@ -45,14 +45,9 @@ public class TestSample {
             driver.manage().timeouts().implicitlyWait(getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
         } catch (Exception e) {
             e.printStackTrace();
-            webElement = null;
+            throw e;
         }
-
-        if (webElement == null) {
-            throw new ElementNotVisibleException("Element isn't visible: " + by.toString());
-        } else {
-            return webElement;
-        }
+        return webElement;
     }
 
     @BeforeClass
@@ -67,7 +62,7 @@ public class TestSample {
         driver.get("http://www.google.com");
 
         // Find the text input element by its name
-        WebElement searchInputField = driver.findElement(By.id("sb_ifc0"));
+        WebElement searchInputField = driver.findElement(By.id("lst-ib"));
 
         // Enter something to search for
         searchInputField.sendKeys("SeleniumHQ");
@@ -87,8 +82,9 @@ public class TestSample {
 
         // Wait for page and elements on page to load
         waitForElementVisible(By.cssSelector(
-                "a[href='https://www.testbirds.com/services/quality-assurance/testing-environment/?utm_source=seleniumhq&utm_campaign=int-cloud-logo-sponsoring-seleniumhq&utm_medium=logo-sponsoring']"
-                        + " > img[src='/sponsors/testbirds.jpg']"), 5);
+                "a[href='https://www.testbirds.com/services/quality-assurance/testing-environment"
+                        + "/?utm_source=seleniumhq&utm_campaign=int-cloud-logo-sponsoring-seleniumhq&utm_medium=logo-sponsoring']"
+                        + " > img[src='/sponsors/testbirds.jpg']"), 10);
 
         // Find Download tab by CSS selector, check text and title
         WebElement downloadTab = waitForElementVisible(By.cssSelector("#menu_download > a"), 5);
@@ -102,7 +98,7 @@ public class TestSample {
         // Find selenium-java version by CSS selector and verify its value
         WebElement seleniumJavaVersion = waitForElementVisible(By.cssSelector(
                 "p +table > tbody > tr:first-child > td:nth-child(2)"), 5);
-        assertEquals(seleniumJavaVersion.getText(), "3.0.1");
+        assertEquals(seleniumJavaVersion.getText(), "3.1.0");
     }
 
     @AfterClass

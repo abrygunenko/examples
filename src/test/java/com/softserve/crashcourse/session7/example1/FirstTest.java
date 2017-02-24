@@ -15,6 +15,11 @@ public class FirstTest {
 
     @Test
     public void test2() {
-        System.out.println("Selenium Version: " + System.getProperty("org.seleniumhq.selenium-version"));
+        System.out.println("Selenium Version: " + System.getProperty("selenium-version"));
+    }
+
+    @Test
+    public void test3() {
+        System.out.println("Browser: " + System.getProperty("browser"));
     }
 }

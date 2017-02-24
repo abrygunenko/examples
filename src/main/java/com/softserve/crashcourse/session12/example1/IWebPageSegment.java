@@ -41,4 +41,20 @@ public interface IWebPageSegment {
     void selectOptionByIndex(By locator, int index);
 
     void selectOptionByIndex(WebElement webElement, By locator, int index);
+
+    String getElementText(By locator);
+
+    String getElementText(WebElement webElement, By locator);
+
+    Boolean verifyElementText(By locator, String expectedText);
+
+    Boolean verifyElementText(WebElement webElement, By locator, String expectedText);
+
+    String getElementAttributeValue(By locator, String attributeName);
+
+    String getElementAttributeValue(WebElement webElement, By locator, String attributeName);
+
+    Boolean verifyElementAttributeValue(By locator, String attributeName, String expectedAttributeValue);
+
+    Boolean verifyElementAttributeValue(WebElement webElement, By locator, String attributeName, String expectedAttributeValue);
 }

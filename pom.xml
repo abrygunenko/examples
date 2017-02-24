@@ -9,8 +9,8 @@
     <version>1.0</version>
 
     <properties>
-        <org.seleniumhq.selenium-version>3.0.1</org.seleniumhq.selenium-version>
-        <!--<browser>firefox</browser>-->
+        <selenium-version>3.0.1</selenium-version>
+        <browser>firefox</browser>
     </properties>
 
     <build>
@@ -42,7 +42,8 @@
                         <!--<suiteXmlFile>src/test/resources/com/softserve/crashcourse/session9/example2/testng/testng2.xml</suiteXmlFile>-->
                     </suiteXmlFiles>
                     <systemPropertyVariables>
-                        <browser>firefox</browser>
+                        <selenium-version>${selenium-version}</selenium-version>
+                        <browser>${browser}</browser>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
@@ -79,20 +80,17 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-server</artifactId>
-            <version>${org.seleniumhq.selenium-version}
-            </version>
+            <version>${selenium-version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>${org.seleniumhq.selenium-version}
-            </version>
+            <version>${selenium-version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-firefox-driver</artifactId>
-            <version>${org.seleniumhq.selenium-version}
-            </version>
+            <version>${selenium-version}</version>
         </dependency>
 
     </dependencies>
