@@ -9,9 +9,12 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import static com.softserve.crashcourse.session12.example1.Browser.*;
+
 public abstract class BaseWebTest {
     private WebDriver webDriver;
-    private String browser = System.getProperty("browser");
+    private String browserName = System.getProperty("browser");
+    private Browser browser;
 
     protected WebDriver getWebDriver() {
         return webDriver;
@@ -21,25 +24,43 @@ public abstract class BaseWebTest {
         return this.webDriver = webDriver;
     }
 
+    protected Browser getBrowser() {
+        return browser;
+    }
+
+    protected Browser setBrowser(Browser browser) {
+        this.browser = browser;
+        return getBrowser();
+    }
+
     @BeforeSuite
     public WebDriver initializeWebDriver() {
         WebDriver webDriver;
 
-        if (browser.equals("firefox")) {
+        if (browserName.equals(FIREFOX.getBrowserName())) {
             webDriver = new FirefoxDriver();
-        } else if (browser.equals("chrome")) {
+            setBrowser(FIREFOX);
+        } else if (browserName.equals(CHROME.getBrowserName())) {
             webDriver = new ChromeDriver();
-        } else if (browser.equals("edge")) {
+            setBrowser(CHROME);
+        } else if (browserName.equals(EDGE.getBrowserName())) {
             webDriver = new EdgeDriver();
-        } else if (browser.equals("ie")) {
+            setBrowser(EDGE);
+        } else if (browserName.equals(IE.getBrowserName())) {
             webDriver = new InternetExplorerDriver();
-        } else if (browser.equals("safari")) {
+            setBrowser(IE);
+        } else if (browserName.equals(SAFARI.getBrowserName())) {
             webDriver = new SafariDriver();
+            setBrowser(SAFARI);
         } else {
             webDriver = new FirefoxDriver();
+            setBrowser(FIREFOX);
         }
 
-//        webDriver.manage().deleteAllCookies();
+        if (!(getBrowser().equals(IE) || getBrowser().equals(EDGE))) {
+            webDriver.manage().deleteAllCookies();
+        }
+
         webDriver.manage().window().maximize();
         setWebDriver(webDriver);
         return webDriver;

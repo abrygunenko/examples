@@ -1,12 +1,18 @@
 package com.softserve.crashcourse.session12.example1.webpages;
 
 import com.softserve.crashcourse.session12.example1.AbstractWebPageSegment;
+import com.softserve.crashcourse.session12.example1.Browser;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 public abstract class AbstractWebPage extends AbstractWebPageSegment implements IWebPage {
 
     private String baseUrl;
     private String baseUrlSuffix;
+    private String pageTitle;
 
     public String getBaseUrl() {
         return baseUrl;
@@ -24,14 +30,27 @@ public abstract class AbstractWebPage extends AbstractWebPageSegment implements 
         this.baseUrlSuffix = baseUrlSuffix;
     }
 
-    public AbstractWebPage(WebDriver webDriver, String baseUrl, String baseUrlSuffix) {
-        super(webDriver);
+    public String getPageTitle() {
+        return pageTitle;
+    }
+
+    public String setPageTitle(String webPageTitle) {
+        this.pageTitle = webPageTitle;
+        return getPageTitle();
+    }
+
+    public AbstractWebPage(WebDriver webDriver, Browser browser, String pageTitle, String baseUrl, String baseUrlSuffix) {
+        super(webDriver, browser);
         setBaseUrl(baseUrl);
         setBaseUrlSuffix(baseUrlSuffix);
+        setPageTitle(pageTitle);
     }
 
     @Override
-    public abstract IWebPage initializePage();
+    public IWebPage initializePage() {
+        verifyWebPageTitle(getPageTitle());
+        return this;
+    }
 
     @Override
     public IWebPage openPage() {
@@ -59,10 +78,27 @@ public abstract class AbstractWebPage extends AbstractWebPageSegment implements 
 
     @Override
     public Boolean verifyWebPageTitle(String expectedWebPageTitle) {
-        String actualWebPageTitle = getWebPageTitle();
-        if (!actualWebPageTitle.equals(expectedWebPageTitle)) {
+        Boolean titleIsEqual;
+        WebDriver webDriver = getWebDriver();
+
+        try {
+            // nullify implicitlyWait( )
+            webDriver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+
+            // Create web element
+            titleIsEqual = new WebDriverWait(webDriver, getDefaultExplicitWaitTimeout())
+                    .until(ExpectedConditions.titleIs(expectedWebPageTitle));
+
+            // reset implicitlyWait( )
+            webDriver.manage().timeouts().implicitlyWait(getDefaultImplicitWaitTimeout(), TimeUnit.SECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+
+        if (!titleIsEqual) {
             throw new RuntimeException("Page title does't match.\nExpected: " + expectedWebPageTitle
-                    + "\nFound: " + actualWebPageTitle);
+                    + "\nFound: " + getWebPageTitle());
         } else {
             return true;
         }

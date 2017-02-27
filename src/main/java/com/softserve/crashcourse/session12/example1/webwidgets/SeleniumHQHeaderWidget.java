@@ -1,5 +1,6 @@
 package com.softserve.crashcourse.session12.example1.webwidgets;
 
+import com.softserve.crashcourse.session12.example1.Browser;
 import com.softserve.crashcourse.session12.example1.webpages.DownloadsSeleniumHQWebPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,8 +17,8 @@ public class SeleniumHQHeaderWidget extends AbstractWebPageWidget {
     private By documentationTabLocator = By.cssSelector("#menu_documentation > a");
     private By projectsTabLocator = By.cssSelector("#menu_projects > a");
 
-    public SeleniumHQHeaderWidget(WebDriver webDriver) {
-        super(webDriver);
+    public SeleniumHQHeaderWidget(WebDriver webDriver, Browser browser) {
+        super(webDriver, browser);
     }
 
     @Override
@@ -37,6 +38,6 @@ public class SeleniumHQHeaderWidget extends AbstractWebPageWidget {
 
     public DownloadsSeleniumHQWebPage navigateToDownloadsPage() {
         clickOnElement(headerBody, downloadTabLocator);
-        return new DownloadsSeleniumHQWebPage(getWebDriver()).initializePage();
+        return new DownloadsSeleniumHQWebPage(getWebDriver(), getBrowser()).initializePage();
     }
 }

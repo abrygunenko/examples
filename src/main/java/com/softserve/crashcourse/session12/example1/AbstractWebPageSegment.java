@@ -14,11 +14,13 @@ import java.util.concurrent.TimeUnit;
 public abstract class AbstractWebPageSegment implements IWebPageSegment {
 
     private WebDriver webDriver;
+    private Browser browser;
     private long defaultImplicitWaitTimeout = 10;
     private long defaultExplicitWaitTimeout = 10;
 
-    public AbstractWebPageSegment(WebDriver webDriver) {
+    public AbstractWebPageSegment(WebDriver webDriver, Browser browser) {
         setWebDriver(webDriver);
+        setBrowser(browser);
         getWebDriver().manage().timeouts().implicitlyWait(getDefaultImplicitWaitTimeout(), TimeUnit.SECONDS);
     }
 
@@ -49,6 +51,15 @@ public abstract class AbstractWebPageSegment implements IWebPageSegment {
     public long setDefaultExplicitWaitTimeout(long defaultExplicitWaitTimeout) {
         this.defaultExplicitWaitTimeout = defaultExplicitWaitTimeout;
         return getDefaultExplicitWaitTimeout();
+    }
+
+    public Browser getBrowser() {
+        return browser;
+    }
+
+    public Browser setBrowser(Browser browser) {
+        this.browser = browser;
+        return getBrowser();
     }
 
     @Override
