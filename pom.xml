@@ -10,7 +10,7 @@
 
     <properties>
         <selenium-version>3.0.1</selenium-version>
-        <browser>firefox</browser>
+        <browser>chrome</browser>
     </properties>
 
     <build>

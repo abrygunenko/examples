@@ -1,25 +1,24 @@
 package com.softserve.crashcourse.session12.example1.webpages;
 
-import org.openqa.selenium.By;
+import com.softserve.crashcourse.session12.example1.webwidgets.SeleniumHQHeaderWidget;
 import org.openqa.selenium.WebDriver;
 
 public abstract class AbstractSeleniumHQWebPage extends AbstractWebPage {
 
-    protected By downloadTabLocator = By.cssSelector("#menu_download > a");
+    private SeleniumHQHeaderWidget seleniumHQHeaderWidget;
 
     public AbstractSeleniumHQWebPage(WebDriver webDriver, String baseUrlSuffix) {
         super(webDriver, "http://www.seleniumhq.org/", baseUrlSuffix);
+        seleniumHQHeaderWidget = new SeleniumHQHeaderWidget(webDriver);
     }
 
     @Override
     public IWebPage initializePage() {
-        verifyElementText(downloadTabLocator, "Download");
-        verifyElementAttributeValue(downloadTabLocator, "title", "Get Selenium");
+        seleniumHQHeaderWidget.initializeWidget();
         return this;
     }
 
     public DownloadsSeleniumHQWebPage navigateToDownloadsSeleniumHQWebPage() {
-        clickOnElement(downloadTabLocator);
-        return new DownloadsSeleniumHQWebPage(getWebDriver()).initializePage();
+        return seleniumHQHeaderWidget.navigateToDownloadsPage();
     }
 }

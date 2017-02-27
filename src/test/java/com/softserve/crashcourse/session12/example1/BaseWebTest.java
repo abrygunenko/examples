@@ -39,7 +39,7 @@ public abstract class BaseWebTest {
             webDriver = new FirefoxDriver();
         }
 
-        webDriver.manage().deleteAllCookies();
+//        webDriver.manage().deleteAllCookies();
         webDriver.manage().window().maximize();
         setWebDriver(webDriver);
         return webDriver;

@@ -236,4 +236,12 @@ public abstract class AbstractWebPageSegment implements IWebPageSegment {
             return true;
         }
     }
+
+    public void verifyElementTitle(By locator, String expectedElementTitle) {
+        verifyElementAttributeValue(locator, "title", expectedElementTitle);
+    }
+
+    public void verifyElementTitle(WebElement webElement, By locator, String expectedElementTitle) {
+        verifyElementAttributeValue(webElement, locator, "title", expectedElementTitle);
+    }
 }
