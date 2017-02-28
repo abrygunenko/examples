@@ -10,8 +10,6 @@ public interface IWebPageSegment {
 
     WebDriver getWebDriver();
 
-    WebDriver setWebDriver(WebDriver webDriver);
-
     WebElement locateElement(By locator);
 
     WebElement locateElement(WebElement webElement, By locator);

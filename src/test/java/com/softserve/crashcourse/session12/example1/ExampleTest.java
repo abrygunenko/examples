@@ -10,7 +10,7 @@ public class ExampleTest extends BaseWebTest {
 
     @Test
     public void exampleTest() {
-        MainGoogleWebPage mainGoogleWebPage = new MainGoogleWebPage(getWebDriver(), getBrowser());
+        MainGoogleWebPage mainGoogleWebPage = new MainGoogleWebPage();
         mainGoogleWebPage.openPage();
         SearchResultsGoogleWebPage searchResultsGoogleWebPage = mainGoogleWebPage.searchForSeleniumHQ();
         MainSeleniumHQWebPage mainSeleniumHQWebPage = searchResultsGoogleWebPage.navigateToMainSeleniumHQWebPage();

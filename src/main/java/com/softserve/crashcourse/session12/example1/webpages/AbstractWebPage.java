@@ -1,7 +1,6 @@
 package com.softserve.crashcourse.session12.example1.webpages;
 
 import com.softserve.crashcourse.session12.example1.AbstractWebPageSegment;
-import com.softserve.crashcourse.session12.example1.Browser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -39,8 +38,8 @@ public abstract class AbstractWebPage extends AbstractWebPageSegment implements 
         return getPageTitle();
     }
 
-    public AbstractWebPage(WebDriver webDriver, Browser browser, String pageTitle, String baseUrl, String baseUrlSuffix) {
-        super(webDriver, browser);
+    public AbstractWebPage(String pageTitle, String baseUrl, String baseUrlSuffix) {
+        super();
         setBaseUrl(baseUrl);
         setBaseUrlSuffix(baseUrlSuffix);
         setPageTitle(pageTitle);
