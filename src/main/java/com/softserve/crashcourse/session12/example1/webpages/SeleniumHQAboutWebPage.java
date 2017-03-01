@@ -9,6 +9,9 @@ public class SeleniumHQAboutWebPage extends AbstractSeleniumHQWebPage {
     @FindBy(css = "h3 > a[href='/docs'")
     private WebElement documentationLink;
 
+    @FindBy(id = "aefefefsfe")
+    private WebElement test;
+
     public SeleniumHQAboutWebPage() {
         super("About Selenium", "about/");
         PageFactory.initElements(getWebDriver(), this);
@@ -17,6 +20,8 @@ public class SeleniumHQAboutWebPage extends AbstractSeleniumHQWebPage {
     @Override
     public SeleniumHQAboutWebPage initializePage() {
         super.initializePage();
+        documentationLink.isDisplayed();
+//        test.isDisplayed();
         return this;
     }
 

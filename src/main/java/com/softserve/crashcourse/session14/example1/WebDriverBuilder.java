@@ -1,6 +1,7 @@
 package com.softserve.crashcourse.session14.example1;
 
 import com.softserve.crashcourse.session12.example1.Browser;
+import com.softserve.crashcourse.session12.example1.WebDriverProvider;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -66,5 +67,11 @@ public enum WebDriverBuilder {
         } else {
             return FIREFOX;
         }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        WebDriverProvider.INSTANCE.getWebDriver().get("http://google.pl/");
+        Thread.sleep(5000);
+        WebDriverProvider.INSTANCE.getWebDriver().quit();
     }
 }

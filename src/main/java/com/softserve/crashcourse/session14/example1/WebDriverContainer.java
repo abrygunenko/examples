@@ -19,6 +19,10 @@ public class WebDriverContainer {
         return webDriver;
     }
 
+    public Browser getBrowser() {
+        return browser;
+    }
+
     private WebDriverContainer() {
         webDriver = init();
     }
