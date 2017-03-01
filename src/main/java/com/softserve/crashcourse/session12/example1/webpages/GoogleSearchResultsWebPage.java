@@ -5,12 +5,12 @@ import org.openqa.selenium.By;
 import static com.softserve.crashcourse.session12.example1.Browser.EDGE;
 import static com.softserve.crashcourse.session12.example1.Browser.IE;
 
-public class SearchResultsGoogleWebPage extends AbstractGoogleWebPage {
+public class GoogleSearchResultsWebPage extends AbstractGoogleWebPage {
 
     protected String textToSearch;
     private By searchResultsNavigationBarSelector = By.id("navcnt");
 
-    public SearchResultsGoogleWebPage(String textToSearch) {
+    public GoogleSearchResultsWebPage(String textToSearch) {
         super(textToSearch + " - Szukaj w Google", "#q=" + textToSearch + "&*");
 
         if (getBrowser().equals(IE) || getBrowser().equals(EDGE)) {
@@ -21,7 +21,7 @@ public class SearchResultsGoogleWebPage extends AbstractGoogleWebPage {
     }
 
     @Override
-    public SearchResultsGoogleWebPage initializePage() {
+    public GoogleSearchResultsWebPage initializePage() {
         super.initializePage();
         locateElement(searchResultsNavigationBarSelector);
         return this;
@@ -31,8 +31,8 @@ public class SearchResultsGoogleWebPage extends AbstractGoogleWebPage {
         clickOnElement(By.cssSelector("a[href='" + link + "']"));
     }
 
-    public MainSeleniumHQWebPage navigateToMainSeleniumHQWebPage() {
+    public SeleniumHQMainWebPage navigateToMainSeleniumHQWebPage() {
         navigateToSearchResultByLink("http://www.seleniumhq.org/");
-        return new MainSeleniumHQWebPage().initializePage();
+        return new SeleniumHQMainWebPage().initializePage();
     }
 }

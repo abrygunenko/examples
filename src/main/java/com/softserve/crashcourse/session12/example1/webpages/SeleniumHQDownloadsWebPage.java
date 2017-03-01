@@ -2,17 +2,17 @@ package com.softserve.crashcourse.session12.example1.webpages;
 
 import org.openqa.selenium.By;
 
-public class DownloadsSeleniumHQWebPage extends AbstractSeleniumHQWebPage {
+public class SeleniumHQDownloadsWebPage extends AbstractSeleniumHQWebPage {
 
     private By seleniumJavaVersionLocator = By.cssSelector("p +table > tbody > tr:first-child > td:nth-child(2)");
     private By navigationMenu = By.id("nav");
 
-    public DownloadsSeleniumHQWebPage() {
+    public SeleniumHQDownloadsWebPage() {
         super("Downloads", "download/");
     }
 
     @Override
-    public DownloadsSeleniumHQWebPage initializePage() {
+    public SeleniumHQDownloadsWebPage initializePage() {
         super.initializePage();
         locateElement(navigationMenu);
         locateElement(seleniumJavaVersionLocator);

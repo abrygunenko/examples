@@ -1,13 +1,13 @@
 package com.softserve.crashcourse.session12.example1.webpages;
 
-public class MainGoogleWebPage extends AbstractGoogleWebPage {
+public class GoogleMainWebPage extends AbstractGoogleWebPage {
 
-    public MainGoogleWebPage() {
+    public GoogleMainWebPage() {
         super("Google", "");
     }
 
     @Override
-    public MainGoogleWebPage initializePage() {
+    public GoogleMainWebPage initializePage() {
         super.initializePage();
         return this;
     }

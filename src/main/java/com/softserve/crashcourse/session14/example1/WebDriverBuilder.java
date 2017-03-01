@@ -1,5 +1,6 @@
-package com.softserve.crashcourse.session12.example1;
+package com.softserve.crashcourse.session14.example1;
 
+import com.softserve.crashcourse.session12.example1.Browser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -41,6 +42,12 @@ public enum WebDriverBuilder {
         } else {
             webDriver = new FirefoxDriver();
         }
+
+        if (!(browser.equals(IE) || browser.equals(EDGE))) {
+            webDriver.manage().deleteAllCookies();
+        }
+
+        webDriver.manage().window().maximize();
     }
 
     private Browser getExpectedBrowser() {

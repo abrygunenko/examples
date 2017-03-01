@@ -22,7 +22,7 @@ public abstract class AbstractWebPageSegment implements IWebPageSegment {
 
     @Override
     public WebDriver getWebDriver() {
-        return WebDriverBuilder.INSTANCE.getWebDriver();
+        return WebDriverProvider.INSTANCE.getWebDriver();
     }
 
     public long getDefaultImplicitWaitTimeout() {
@@ -44,7 +44,7 @@ public abstract class AbstractWebPageSegment implements IWebPageSegment {
     }
 
     public Browser getBrowser() {
-        return WebDriverBuilder.INSTANCE.getBrowser();
+        return WebDriverProvider.INSTANCE.getBrowser();
     }
 
     @Override

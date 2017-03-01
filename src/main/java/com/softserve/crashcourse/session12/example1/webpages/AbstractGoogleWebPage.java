@@ -18,13 +18,13 @@ public abstract class AbstractGoogleWebPage extends AbstractWebPage {
         return this;
     }
 
-    public SearchResultsGoogleWebPage search(String textToSearch) {
+    public GoogleSearchResultsWebPage search(String textToSearch) {
         enterValue(searchInputFieldLocator, textToSearch);
         submitForm(searchInputFieldLocator);
-        return new SearchResultsGoogleWebPage(textToSearch).initializePage();
+        return new GoogleSearchResultsWebPage(textToSearch).initializePage();
     }
 
-    public SearchResultsGoogleWebPage searchForSeleniumHQ() {
+    public GoogleSearchResultsWebPage searchForSeleniumHQ() {
         return search("SeleniumHQ");
     }
 }

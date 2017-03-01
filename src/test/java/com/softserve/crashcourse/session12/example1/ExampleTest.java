@@ -1,20 +1,20 @@
 package com.softserve.crashcourse.session12.example1;
 
-import com.softserve.crashcourse.session12.example1.webpages.DownloadsSeleniumHQWebPage;
-import com.softserve.crashcourse.session12.example1.webpages.MainGoogleWebPage;
-import com.softserve.crashcourse.session12.example1.webpages.MainSeleniumHQWebPage;
-import com.softserve.crashcourse.session12.example1.webpages.SearchResultsGoogleWebPage;
+import com.softserve.crashcourse.session12.example1.webpages.SeleniumHQDownloadsWebPage;
+import com.softserve.crashcourse.session12.example1.webpages.GoogleMainWebPage;
+import com.softserve.crashcourse.session12.example1.webpages.SeleniumHQMainWebPage;
+import com.softserve.crashcourse.session12.example1.webpages.GoogleSearchResultsWebPage;
 import org.testng.annotations.Test;
 
 public class ExampleTest extends BaseWebTest {
 
     @Test
     public void exampleTest() {
-        MainGoogleWebPage mainGoogleWebPage = new MainGoogleWebPage();
-        mainGoogleWebPage.openPage();
-        SearchResultsGoogleWebPage searchResultsGoogleWebPage = mainGoogleWebPage.searchForSeleniumHQ();
-        MainSeleniumHQWebPage mainSeleniumHQWebPage = searchResultsGoogleWebPage.navigateToMainSeleniumHQWebPage();
-        DownloadsSeleniumHQWebPage downloadsSeleniumHQWebPage = mainSeleniumHQWebPage.navigateToDownloadsSeleniumHQWebPage();
-        downloadsSeleniumHQWebPage.verifySeleniumJavaVersion("3.1.0");
+        GoogleMainWebPage googleMainWebPage = new GoogleMainWebPage();
+        googleMainWebPage.openPage();
+        GoogleSearchResultsWebPage googleSearchResultsWebPage = googleMainWebPage.searchForSeleniumHQ();
+        SeleniumHQMainWebPage seleniumHQMainWebPage = googleSearchResultsWebPage.navigateToMainSeleniumHQWebPage();
+        SeleniumHQDownloadsWebPage seleniumHQDownloadsWebPage = seleniumHQMainWebPage.navigateToDownloadsSeleniumHQWebPage();
+        seleniumHQDownloadsWebPage.verifySeleniumJavaVersion("3.1.0");
     }
 }

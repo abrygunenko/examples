@@ -18,7 +18,27 @@ public abstract class AbstractSeleniumHQWebPage extends AbstractWebPage {
         return this;
     }
 
-    public DownloadsSeleniumHQWebPage navigateToDownloadsSeleniumHQWebPage() {
+    public SeleniumHQDownloadsWebPage navigateToDownloadsSeleniumHQWebPage() {
         return seleniumHQHeaderWidget.navigateToDownloadsPage();
+    }
+
+    public SeleniumHQDocumentsWebPage navigateToDocumentsSeleniumHQWebPage() {
+        return seleniumHQHeaderWidget.navigateToDocumentsPage();
+    }
+
+    public SeleniumHQProjectsWebPage navigateToProjectsSeleniumHQWebPage() {
+        return seleniumHQHeaderWidget.navigateToProjectsPage();
+    }
+
+    public SeleniumHQSupportWebPage navigateToSupportSeleniumHQWebPage() {
+        return seleniumHQHeaderWidget.navigateToSupportPage();
+    }
+
+    public SeleniumHQAboutWebPage navigateToAboutSeleniumHQWebPage() {
+        return seleniumHQHeaderWidget.navigateToAboutPage();
+    }
+
+    public SeleniumHQMainWebPage navigateToMainSeleniumHQWebPage() {
+        return seleniumHQHeaderWidget.navigateToMainPage();
     }
 }

@@ -1,5 +1,6 @@
-package com.softserve.crashcourse.session12.example1;
+package com.softserve.crashcourse.session14.example1;
 
+import com.softserve.crashcourse.session12.example1.Browser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -11,9 +12,16 @@ import static com.softserve.crashcourse.session12.example1.Browser.*;
 
 public class WebDriverContainer {
 
-    private static WebDriver webDriver;
+    private WebDriver webDriver;
+    private final Browser browser = getExpectedBrowser();
 
-    private WebDriverContainer() {}
+    public WebDriver getWebDriver() {
+        return webDriver;
+    }
+
+    private WebDriverContainer() {
+        webDriver = init();
+    }
 
     private static class WebDriverContainerHolder {
         private static final WebDriverContainer HOLDER_INSTANCE = new WebDriverContainer();
@@ -23,43 +31,56 @@ public class WebDriverContainer {
         return WebDriverContainerHolder.HOLDER_INSTANCE;
     }
 
-    public static WebDriverContainer instance() {
-        return WebDriverContainerHolder.HOLDER_INSTANCE;
-    }
-
-    public WebDriver getDriver() {
-        return webDriver;
-    }
-
-    public void init() {
+    private static Browser getExpectedBrowser() {
         String browserName = System.getProperty("browser");
 
         if (browserName.equals(FIREFOX.getBrowserName())) {
-            webDriver = new FirefoxDriver();
+            return FIREFOX;
         } else if (browserName.equals(CHROME.getBrowserName())) {
-            webDriver = new ChromeDriver();
+            return CHROME;
         } else if (browserName.equals(EDGE.getBrowserName())) {
-            webDriver = new EdgeDriver();
+            return EDGE;
         } else if (browserName.equals(IE.getBrowserName())) {
-            webDriver = new InternetExplorerDriver();
+            return IE;
         } else if (browserName.equals(SAFARI.getBrowserName())) {
+            return SAFARI;
+        } else {
+            return FIREFOX;
+        }
+    }
+
+    private WebDriver init() {
+        if (browser.equals(FIREFOX)) {
+            webDriver = new FirefoxDriver();
+        } else if (browser.equals(CHROME)) {
+            webDriver = new ChromeDriver();
+        } else if (browser.equals(EDGE)) {
+            webDriver = new EdgeDriver();
+        } else if (browser.equals(IE)) {
+            webDriver = new InternetExplorerDriver();
+        } else if (browser.equals(SAFARI)) {
             webDriver = new SafariDriver();
         } else {
             webDriver = new FirefoxDriver();
         }
+
+        if (!(browser.equals(IE) || browser.equals(EDGE))) {
+            webDriver.manage().deleteAllCookies();
+        }
+
+        webDriver.manage().window().maximize();
+        return webDriver;
     }
 
     public void close() {
         if (webDriver != null) {
             webDriver.quit();
-        } else
-            System.out.println("null error");
+        }
     }
 
     public static void main(String[] args) throws InterruptedException {
-        WebDriverContainer webDriverContainer = WebDriverContainer.instance();
-        webDriverContainer.init();
-        webDriverContainer.getDriver().get("http://google.pl/");
+        WebDriverContainer webDriverContainer = getInstance();
+        webDriverContainer.getWebDriver().get("http://google.pl/");
         Thread.sleep(5000);
         webDriverContainer.close();
     }

@@ -1,6 +1,6 @@
 package com.softserve.crashcourse.session12.example1.webwidgets;
 
-import com.softserve.crashcourse.session12.example1.webpages.DownloadsSeleniumHQWebPage;
+import com.softserve.crashcourse.session12.example1.webpages.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -13,6 +13,7 @@ public class SeleniumHQHeaderWidget extends AbstractWebPageWidget {
     private By supportTabLocator = By.cssSelector("#menu_support > a");
     private By documentationTabLocator = By.cssSelector("#menu_documentation > a");
     private By projectsTabLocator = By.cssSelector("#menu_projects > a");
+    private By aboutTabLocator = By.cssSelector("#menu_about > a");
 
     public SeleniumHQHeaderWidget() {
         super();
@@ -31,10 +32,37 @@ public class SeleniumHQHeaderWidget extends AbstractWebPageWidget {
         verifyElementTitle(headerBody, documentationTabLocator, "Technical references and guides");
         verifyElementText(headerBody, projectsTabLocator, "Projects");
         verifyElementTitle(headerBody, projectsTabLocator, "Selenium Projects");
+        verifyElementText(headerBody, aboutTabLocator, "About");
+        verifyElementTitle(headerBody, aboutTabLocator, "Overview of Selenium");
     }
 
-    public DownloadsSeleniumHQWebPage navigateToDownloadsPage() {
-        clickOnElement(headerBody, downloadTabLocator);
-        return new DownloadsSeleniumHQWebPage().initializePage();
+    public SeleniumHQDownloadsWebPage navigateToDownloadsPage() {
+        clickOnElement(downloadTabLocator);
+        return new SeleniumHQDownloadsWebPage().initializePage();
+    }
+
+    public SeleniumHQDocumentsWebPage navigateToDocumentsPage() {
+        clickOnElement(documentationTabLocator);
+        return new SeleniumHQDocumentsWebPage().initializePage();
+    }
+
+    public SeleniumHQProjectsWebPage navigateToProjectsPage() {
+        clickOnElement(projectsTabLocator);
+        return new SeleniumHQProjectsWebPage().initializePage();
+    }
+
+    public SeleniumHQSupportWebPage navigateToSupportPage() {
+        clickOnElement(supportTabLocator);
+        return new SeleniumHQSupportWebPage().initializePage();
+    }
+
+    public SeleniumHQAboutWebPage navigateToAboutPage() {
+        clickOnElement(aboutTabLocator);
+        return new SeleniumHQAboutWebPage().initializePage();
+    }
+
+    public SeleniumHQMainWebPage navigateToMainPage() {
+        clickOnElement(headerTitleLocator);
+        return new SeleniumHQMainWebPage().initializePage();
     }
 }
