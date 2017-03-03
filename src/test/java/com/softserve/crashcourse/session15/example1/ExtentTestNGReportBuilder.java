@@ -2,7 +2,7 @@ package com.softserve.crashcourse.session15.example1;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -23,9 +23,7 @@ public class ExtentTestNGReportBuilder {
 
     @BeforeSuite
     public void beforeSuite() {
-        extent = ExtentManager.createInstance("extent.html");
-        ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter("extent.html");
-        extent.attachReporter(htmlReporter);
+        extent = ExtentManager.createInstance("target/reports/ReportBuilder.html");
     }
 
     @BeforeClass
@@ -42,20 +40,18 @@ public class ExtentTestNGReportBuilder {
 
     @AfterMethod
     public synchronized void afterMethod(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            test.get().fail(result.getThrowable());
-
-            String screenshotPath = captureScreenShot();
-
-            try {
-                test.get().addScreenCaptureFromPath(screenshotPath);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        test.get().assignCategory(result.getMethod().getGroups());
+        if (result.getStatus() == ITestResult.SUCCESS) {
+            test.get().pass("Test passed");
         } else if (result.getStatus() == ITestResult.SKIP) {
             test.get().skip(result.getThrowable());
         } else {
-            test.get().pass("Test passed");
+            String screenshotPath = captureScreenShot();
+            try {
+                test.get().fail(result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         extent.flush();

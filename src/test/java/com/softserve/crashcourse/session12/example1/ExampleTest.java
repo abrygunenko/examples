@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class ExampleTest extends BaseWebTest {
 
-    @Test
+    @Test(testName = "Test Example", groups = "default")
     public void exampleTest() {
         GoogleMainWebPage googleMainWebPage = new GoogleMainWebPage();
         googleMainWebPage.openPage();

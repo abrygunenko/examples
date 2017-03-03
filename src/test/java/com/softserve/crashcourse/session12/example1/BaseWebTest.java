@@ -1,10 +1,11 @@
 package com.softserve.crashcourse.session12.example1;
 
+import com.softserve.crashcourse.session15.example1.ExtentTestNGReportBuilder;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-public abstract class BaseWebTest {
+public abstract class BaseWebTest extends ExtentTestNGReportBuilder {
 
     protected WebDriver getWebDriver() {
         return WebDriverProvider.INSTANCE.getWebDriver();

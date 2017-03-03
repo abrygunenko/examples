@@ -10,20 +10,33 @@ import java.io.IOException;
 
 public class ScreenshotHelper {
 
-    private static String screenshotDirectoryPath = "target/screenshots/";
-    private static String screenshotFileName = "screenshot.png";
+    private static String screenshotDirectoryPath = "target/reports/screenshots/";
 
     public static String captureScreenShot() {
+        createDirectory(screenshotDirectoryPath);
         // Take screenshot and store as a file format
-        String screenshotPath = screenshotDirectoryPath + System.currentTimeMillis() + screenshotFileName;
-        File src = ((TakesScreenshot) WebDriverProvider.INSTANCE.getWebDriver()).getScreenshotAs(OutputType.FILE);
+        String screenshotPath = screenshotDirectoryPath + "screenshot_" + System.currentTimeMillis() + ".png";
+        File source = ((TakesScreenshot) WebDriverProvider.INSTANCE.getWebDriver()).getScreenshotAs(OutputType.FILE);
+        File destination = new File(screenshotPath);
 
         try {
             // now copy the  screenshot to desired location using copyFile method
-            FileUtils.copyFile(src, new File(screenshotPath));
+            FileUtils.copyFile(source, destination);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return screenshotPath;
+
+        return destination.getAbsoluteFile().getParentFile().getName() + "/" + destination.getName();
+    }
+
+    public static void createDirectory(String directoryPath) {
+        File path = new File(directoryPath);
+        String pathToFolder = path.getAbsolutePath();
+        if (!path.exists()) {
+            boolean makeDirectory = new File(pathToFolder).mkdir();
+            if (makeDirectory) {
+                System.out.println("Directory '" + pathToFolder + "' successfully created");
+            }
+        }
     }
 }

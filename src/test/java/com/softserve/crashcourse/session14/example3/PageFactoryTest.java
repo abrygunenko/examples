@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class PageFactoryTest extends BaseWebTest {
 
-    @Test
+    @Test(testName = "Page Factory Example", groups = "pageFactory")
     public void pageFactoryTest() {
         SeleniumHQAboutWebPage seleniumHQAboutWebPage = new SeleniumHQAboutWebPage();
         seleniumHQAboutWebPage.openPage();

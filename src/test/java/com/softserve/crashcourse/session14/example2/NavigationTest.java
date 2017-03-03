@@ -20,32 +20,32 @@ public class NavigationTest extends BaseWebTest {
         seleniumHQMainWebPage.navigateToMainSeleniumHQWebPage();
     }
 
-    @Test
+    @Test(testName = "Navigate to Projects page", groups = "navigation")
     public void navigateToProjectsPageTest() {
         seleniumHQMainWebPage.navigateToProjectsSeleniumHQWebPage();
     }
 
-    @Test
+    @Test(testName = "Navigate to Documents page", groups = "navigation")
     public void navigateToDocumentsPageTest() {
         seleniumHQMainWebPage.navigateToDocumentsSeleniumHQWebPage();
     }
 
-    @Test
+    @Test(testName = "Navigate to Downloads page", groups = "navigation")
     public void navigateToDownloadsPageTest() {
         seleniumHQMainWebPage.navigateToDownloadsSeleniumHQWebPage();
     }
 
-    @Test
+    @Test(testName = "Navigate to Support page", groups = "navigation")
     public void navigateToSupportPageTest() {
         seleniumHQMainWebPage.navigateToSupportSeleniumHQWebPage();
     }
 
-    @Test
+    @Test(testName = "Navigate to About page", groups = "navigation")
     public void navigateToAboutPageTest() {
         seleniumHQMainWebPage.navigateToAboutSeleniumHQWebPage();
     }
 
-    @Test
+    @Test(testName = "Navigate to Main page", groups = "navigation")
     public void navigateToMainPageTest() {
         seleniumHQMainWebPage.navigateToMainSeleniumHQWebPage();
     }

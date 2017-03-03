@@ -3,32 +3,20 @@ package com.softserve.crashcourse.session15.example1;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import com.aventstack.extentreports.reporter.configuration.ChartLocation;
-import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.testng.*;
 import org.testng.xml.XmlSuite;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import static com.softserve.crashcourse.session15.example1.ScreenshotHelper.captureScreenShot;
+import java.util.*;
 
 public class ExtentTestNGIReporterListener implements IReporter {
 
-    private static final String OUTPUT_FOLDER = "target/extent/";
-    private static final String FILE_NAME = "Extent.html";
-
     private ExtentReports extent;
+    private Map<String, ExtentTest> parents = new HashMap<>();
 
     @Override
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
-        createReportDir();
-        init();
+        extent = ExtentManager.createInstance("target/reports/ReporterListener.html");
+        extent.setReportUsesManualConfiguration(true);
 
         for (ISuite suite : suites) {
             Map<String, ISuiteResult> result = suite.getResults();
@@ -39,6 +27,7 @@ public class ExtentTestNGIReporterListener implements IReporter {
                 buildTestNodes(context.getFailedTests(), Status.FAIL);
                 buildTestNodes(context.getSkippedTests(), Status.SKIP);
                 buildTestNodes(context.getPassedTests(), Status.PASS);
+                buildTestNodes(context.getFailedButWithinSuccessPercentageTests(), Status.FAIL);
             }
         }
 
@@ -49,45 +38,35 @@ public class ExtentTestNGIReporterListener implements IReporter {
         extent.flush();
     }
 
-    private void init() {
-        ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(OUTPUT_FOLDER + FILE_NAME);
-        htmlReporter.config().setDocumentTitle("ExtentReports - Created by TestNG Listener");
-        htmlReporter.config().setReportName("This Report");
-        htmlReporter.config().setTestViewChartLocation(ChartLocation.BOTTOM);
-        htmlReporter.config().setTheme(Theme.DARK);
-
-        extent = new ExtentReports();
-        extent.attachReporter(htmlReporter);
-        extent.setReportUsesManualConfiguration(true);
-    }
-
     private void buildTestNodes(IResultMap tests, Status status) {
-        ExtentTest test;
-
         if (tests.size() > 0) {
             for (ITestResult result : tests.getAllResults()) {
-                test = extent.createTest(result.getMethod().getMethodName());
+                String parentTestName = result.getTestClass().getName();
 
-                for (String group : result.getMethod().getGroups())
-                    test.assignCategory(group);
-
-                if (result.getThrowable() != null) {
-                    test.log(status, result.getThrowable());
-                } else {
-                    test.log(status, "Test " + status.toString().toLowerCase() + "ed");
+                if (parents.get(parentTestName) == null) {
+                    ExtentTest parentTest = extent.createTest(parentTestName);
+                    parentTest.getModel().setStartTime(getTime(result.getStartMillis()));
+//                    parentTest.getModel().setEndTime(getTime(result.getEndMillis()));
+                    parents.put(parentTestName, parentTest);
                 }
 
-                test.getModel().setStartTime(getTime(result.getStartMillis()));
-                test.getModel().setEndTime(getTime(result.getEndMillis()));
+                ExtentTest childTest = parents.get(parentTestName).createNode(result.getMethod().getMethodName());
+                childTest.assignCategory(result.getMethod().getGroups());
+                childTest.getModel().setStartTime(getTime(result.getStartMillis()));
+                childTest.getModel().setEndTime(getTime(result.getEndMillis()));
 
-                if (status.toString().toLowerCase().equals("fail")) {
-                    String screenshotPath = captureScreenShot();
+                if (result.getThrowable() != null) {
+                    childTest.log(status, result.getThrowable());
 
-                    try {
-                        test.addScreenCaptureFromPath(screenshotPath);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    //  Doesn't work because report is generated after tests
+                    // String screenshotPath = captureScreenShot();
+                    // try {
+                    //     test.addScreenCaptureFromPath(screenshotPath);
+                    // } catch (IOException e) {
+                    //     e.printStackTrace();
+                    // }
+                } else {
+                    childTest.log(status, "Test " + status.toString().toLowerCase() + "ed");
                 }
             }
         }
@@ -97,16 +76,5 @@ public class ExtentTestNGIReporterListener implements IReporter {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(millis);
         return calendar.getTime();
-    }
-
-    private void createReportDir() {
-        File path = new File(OUTPUT_FOLDER);
-        String pathToReportFolder = path.getAbsolutePath();
-        if (!path.exists()) {
-            boolean makeDirectory = new File(pathToReportFolder).mkdir();
-            if (makeDirectory) {
-                System.out.println("Directory '" + pathToReportFolder + "' successfully created");
-            }
-        }
     }
 }

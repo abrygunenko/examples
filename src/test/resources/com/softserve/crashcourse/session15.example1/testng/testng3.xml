@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+    <listeners>
+        <listener class-name="com.softserve.crashcourse.session15.example1.ExtentTestNGIReporterListener"/>
+    </listeners>
+    <test name="Test">
+        <packages>
+            <package name="com.softserve.crashcourse.session12.example1"/>
+            <package name="com.softserve.crashcourse.session14.example2"/>
+            <package name="com.softserve.crashcourse.session14.example3"/>
+        </packages>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
