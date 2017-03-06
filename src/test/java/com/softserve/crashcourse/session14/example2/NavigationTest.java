@@ -16,7 +16,7 @@ public class NavigationTest extends BaseWebTest {
         seleniumHQMainWebPage.openPage();
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true, dependsOnGroups = "report")
     public void navigateToMainPage() {
         seleniumHQMainWebPage.navigateToMainSeleniumHQWebPage();
     }

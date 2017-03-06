@@ -21,24 +21,24 @@ public class ExtentTestNGReportBuilder {
     private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal();
     private static ThreadLocal<ExtentTest> test = new ThreadLocal();
 
-    @BeforeSuite
+    @BeforeSuite(groups = "report")
     public void beforeSuite() {
         extent = ExtentManager.createInstance("target/reports/ReportBuilder.html");
     }
 
-    @BeforeClass
+    @BeforeClass(groups = "report")
     public synchronized void beforeClass() {
         ExtentTest parent = extent.createTest(getClass().getName());
         parentTest.set(parent);
     }
 
-    @BeforeMethod
+    @BeforeMethod(groups = "report")
     public synchronized void beforeMethod(Method method) {
         ExtentTest child = parentTest.get().createNode(method.getName());
         test.set(child);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true, groups = "report")
     public synchronized void afterMethod(ITestResult result) {
         if (result.getTestName() != null) {
             test.get().getModel().setName(result.getTestName());

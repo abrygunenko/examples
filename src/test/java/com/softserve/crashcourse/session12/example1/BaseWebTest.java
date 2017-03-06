@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-public abstract class BaseWebTest extends ExtentTestNGReportBuilder {
+public abstract class BaseWebTest {
 
     protected WebDriver getWebDriver() {
         return WebDriverProvider.INSTANCE.getWebDriver();
