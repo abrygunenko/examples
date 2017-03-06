@@ -40,6 +40,9 @@ public class ExtentTestNGReportBuilder {
 
     @AfterMethod
     public synchronized void afterMethod(ITestResult result) {
+        if (result.getTestName() != null) {
+            test.get().getModel().setName(result.getTestName());
+        }
         test.get().assignCategory(result.getMethod().getGroups());
         if (result.getStatus() == ITestResult.SUCCESS) {
             test.get().pass("Test passed");

@@ -40,9 +40,15 @@ public class ExtentTestNGITestListener implements ITestListener {
         }
 
         parentTest.set(parents.get(parentTestName));
-        ExtentTest childTest = parentTest.get().createNode(result.getMethod().getMethodName());
+
+        ExtentTest childTest;
+        if (result.getTestName() != null) {
+            childTest = parentTest.get().createNode(result.getTestName());
+        } else {
+            childTest = parentTest.get().createNode(result.getMethod().getMethodName());
+        }
+        childTest.assignCategory(result.getMethod().getGroups());
         test.set(childTest);
-        test.get().assignCategory(result.getMethod().getGroups());
     }
 
     @Override

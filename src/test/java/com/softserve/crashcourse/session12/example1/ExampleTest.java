@@ -15,6 +15,6 @@ public class ExampleTest extends BaseWebTest {
         GoogleSearchResultsWebPage googleSearchResultsWebPage = googleMainWebPage.searchForSeleniumHQ();
         SeleniumHQMainWebPage seleniumHQMainWebPage = googleSearchResultsWebPage.navigateToMainSeleniumHQWebPage();
         SeleniumHQDownloadsWebPage seleniumHQDownloadsWebPage = seleniumHQMainWebPage.navigateToDownloadsSeleniumHQWebPage();
-        seleniumHQDownloadsWebPage.verifySeleniumJavaVersion("3.1.0");
+        seleniumHQDownloadsWebPage.verifySeleniumJavaVersion("3.2.0");
     }
 }

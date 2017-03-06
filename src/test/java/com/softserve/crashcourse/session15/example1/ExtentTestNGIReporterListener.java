@@ -46,11 +46,17 @@ public class ExtentTestNGIReporterListener implements IReporter {
                 if (parents.get(parentTestName) == null) {
                     ExtentTest parentTest = extent.createTest(parentTestName);
                     parentTest.getModel().setStartTime(getTime(result.getStartMillis()));
+//                    parentTest.getModel().setName(result.getTestName());
 //                    parentTest.getModel().setEndTime(getTime(result.getEndMillis()));
                     parents.put(parentTestName, parentTest);
                 }
 
-                ExtentTest childTest = parents.get(parentTestName).createNode(result.getMethod().getMethodName());
+                ExtentTest childTest;
+                if (result.getTestName() != null) {
+                    childTest = parents.get(parentTestName).createNode(result.getTestName());
+                } else {
+                    childTest = parents.get(parentTestName).createNode(result.getMethod().getMethodName());
+                }
                 childTest.assignCategory(result.getMethod().getGroups());
                 childTest.getModel().setStartTime(getTime(result.getStartMillis()));
                 childTest.getModel().setEndTime(getTime(result.getEndMillis()));
